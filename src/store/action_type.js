@@ -1,0 +1,2 @@
+export const LOADDATA = "LOADDATA"
+export const LOADTOPDATA = "LOADTOPDATA"

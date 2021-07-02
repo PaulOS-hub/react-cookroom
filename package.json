@@ -3,25 +3,45 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.14.5",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "antd-mobile": "^2.3.4",
+    "axios": "^0.21.1",
+    "babel-plugin-import": "^1.13.3",
+    "customize-cra": "^1.0.0",
+    "json-server": "^0.16.3",
+    "less": "^4.1.1",
+    "less-loader": "^10.0.0",
+    "memoize-one": "^5.2.1",
+    "nanoid": "^3.1.23",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
+    "react-app-rewired": "^2.1.8",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
     "react-scripts": "4.0.3",
+    "redux": "^4.1.0",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.3.0",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
+    "mock": "json-server ./mock/mock.js -r ./mock/route.json -p 9000 -w"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "no-unused-vars": 0
+    }
   },
   "browserslist": {
     "production": [
