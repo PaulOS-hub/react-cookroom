@@ -1,61 +1,54 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid } from 'antd-mobile'
 import { HotCat } from './StyledCookbook'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { loadDataAsync } from '../../../store/action'
-
-@connect(
-    state => ({
-        tapList: state.tapList // 模块 state.module.xxx
-    }), {
-    loadDataAsync
-}
-)
-
-class HotCatagory extends Component {
-    state = {
-        columnNum: 4
+import { useHistory, useLocation, useParams, useRouteMatch } from 'react-router-dom'
+export default function HotCatagory(props) {
+    const tapList = useSelector(state => state.reducer1.tapList)
+    const dispatch = useDispatch()
+    const [columnNum, setColumnNum] = useState(4)
+    const history = useHistory()
+    const handleClick = el => {
+        history.push("/list", {
+            title: el.title
+        })
     }
-    // static propTypes = {
-    //     tapList: PropTypes.array
-    // }
-    componentDidMount() {
+    useEffect(() => {
         const width = window.innerWidth
         // 适配Ip5机型小屏幕
         if (width < 375) {
-            this.setState({
-                columnNum: 3
-            })
+            setColumnNum(3)
         }
-        this.props.loadDataAsync()
-    }
-    render() {
-        const { columnNum } = this.state
-        const { tapList } = this.props
-        return (
-            <div>
-                <HotCat>
-                    <h1>热门分类</h1>
-                    <div className="gridContent">
-                        <Grid
-                            data={tapList}
-                            columnNum={columnNum}
-                            hasLine={false}
-                            itemStyle={{ padding: '.02rem 0' }}
-                            renderItem={dataItem => (
-                                <div className="gridItem">
-                                    <img src={dataItem.img} alt="" />
-                                    <div className="gridTitle">
-                                        <span>{dataItem.title}</span>
-                                    </div>
+        // dispatch 什么action，把action引入，可以直接传参
+        dispatch(loadDataAsync())
+        return () => {
+            // componentwillUnmount 
+        }
+    }, [dispatch])
+    return (
+        < div >
+            <HotCat>
+                <h1>热门分类</h1>
+                <div className="gridContent">
+                    <Grid
+                        onClick={handleClick}
+                        data={tapList}
+                        columnNum={columnNum}
+                        hasLine={false}
+                        itemStyle={{ padding: '.02rem 0' }}
+                        renderItem={dataItem => (
+                            <div className="gridItem">
+                                <img src={dataItem.img} alt="" />
+                                <div className="gridTitle">
+                                    <span>{dataItem.title}</span>
                                 </div>
-                            )}
-                        />
-                    </div>
-                </HotCat>
-            </div>
-        )
-    }
+                            </div>
+                        )}
+                    />
+                </div>
+            </HotCat>
+        </div >
+    )
 }
-export default HotCatagory

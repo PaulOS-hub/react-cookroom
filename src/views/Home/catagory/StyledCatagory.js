@@ -1,12 +1,16 @@
 import styled from 'styled-components'
 
 const CatagoryWrap = styled.div`
+        display:flex;
+        flex-direction:column;
+        height:100%;
         nav {
             height:.44rem;
             background:#ee7f2f;
             display:flex;
             justify-content:center;
             align-items:center;
+            padding:.1rem 0;
             ul {
                 display:flex;
                 width:1.4rem;
@@ -40,6 +44,7 @@ const CatagoryWrap = styled.div`
             }
         }
 `
+
 export {
     CatagoryWrap
 }

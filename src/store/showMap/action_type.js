@@ -1,0 +1,4 @@
+export const SHOWORMAP = 'SHOWORMAP'
+export const SET_SELECTEDTAB = 'SET_SELECTEDTAB'
+export const SET_CATETAB = 'SET_CATETAB'
+export const SET_CATEASIDE = 'SET_CATEASIDE'

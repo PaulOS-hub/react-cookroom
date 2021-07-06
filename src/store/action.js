@@ -38,6 +38,5 @@ export const loadTopDataASync = () => {
                 payload: data.data.data
             })
         }
-
     }
 }

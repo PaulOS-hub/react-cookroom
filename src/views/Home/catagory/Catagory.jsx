@@ -1,11 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect, Component, useReducer } from 'react'
 import { CatagoryWrap } from './StyledCatagory'
 import Search from '../../../components/search/Search'
+import memoize from 'memoize-one' // 计算属性
+import Menu from './Menu'
+import { setCateTab } from '../../../store/showMap/action'
+import { connect } from 'react-redux'
+
 function Catagory(props) {
-    const [tabIndex, changeTabIndex] = useState(0)
+    const [tabIndex, setTabIndex] = useState(0)
+    const setType = memoize(e => {
+        return e === 0 ? 'category' : 'material'
+    })
+    const type = setType(tabIndex)
     const handleClick = e => {
         return () => {
-            changeTabIndex(e)
+            setTabIndex(e)
+            props.setCateTab(e)
         }
     }
     return (
@@ -18,7 +28,14 @@ function Catagory(props) {
                 </ul>
             </nav>
             <Search hasborder={false} hasbg={true} />
-        </CatagoryWrap>
+            <Menu
+                type={type}
+            />
+        </CatagoryWrap >
     )
 }
-export default Catagory
+export default connect(
+    state => ({}), {
+    setCateTab
+}
+)(Catagory)

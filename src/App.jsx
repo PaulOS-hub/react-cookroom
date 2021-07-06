@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Home from '@/views/Home/Home'
-function App() {
-    const [title, setTitle] = useState("123")
+import { Switch, Route, Redirect } from 'react-router-dom'
+import List from '@/page/list'
+import Learning from '@/views/hooksLearning'
+export default function App() {
     return (
-        <div>
-            <Home />
+
+        <div style={{ height: '100%' }}>
+            <Switch>
+                <Route path="/home" component={Home}></Route>
+                <Route path="/list" component={List}></Route>
+                <Route path="/learning" component={Learning}></Route>
+                <Redirect from='/' to='/home' />
+            </Switch>
         </div>
     )
 }
-export default App
